@@ -1,0 +1,36 @@
+﻿@model HealthObservations.Models.Patient
+@using HealthObservations.App_Code;
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Patient</legend>
+
+    <div>
+        <h2>@Html.DisplayFor(model => model.Firstname) @Html.DisplayFor(model => model.Lastname)</h2>
+    </div>
+
+
+    @foreach (HealthObservations.Models.Measurement measure in Model.MeasurementList)
+    {
+        <div>@measure.ObservationTime @measure.Observation kg Note:    @measure.Notes</div>   
+    }
+</fieldset>
+@{ 
+     if (Model.MeasurementList.Count > 0)
+    {
+        HealthObservations.App_Code.Grapher graph = new Grapher(Model.ObservationTimes(), Model.Observations());
+        graph.Height = 600;
+        graph.Width = 600;
+        string imgname = @Url.Content(graph.FilePathName);
+    <img src= '@(imgname)'  class="chart" title="Trendline of observations" />
+    } 
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+    </p>

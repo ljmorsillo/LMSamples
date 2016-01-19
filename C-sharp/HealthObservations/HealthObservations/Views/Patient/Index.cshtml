@@ -1,0 +1,63 @@
+﻿@model IEnumerable<HealthObservations.Models.Patient>
+@using HealthObservations.App_Code;
+
+@{
+    ViewBag.Title = "Patients";
+}
+<h2>Here are the patients and observations</h2>
+<table>
+    <tr>
+        <th>
+            @* These should be localized using resource files *@
+            Patient Name
+        </th>
+        <th>    
+        </th>
+        <th>Measurements</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="patientRow">
+            <td class="patientName">
+                @Html.DisplayFor(modelItem => item.Lastname) ,&nbsp;  @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                @{ if (item.MeasurementList.Count > 0)
+                   {
+                       List<DateTime> range = item.ObservationTimes().ToList();
+                       List<int> measurements = item.Observations().ToList();
+                       HealthObservations.App_Code.Grapher graph = new Grapher(range, measurements);
+                       graph.Height = 300;
+                       graph.Width = 300;
+                       string imgname = @Url.Content(graph.FilePathName);
+                    <a href='@Url.Action("Create","Observations",new {Id= item.Id})' > <img src= '@(imgname)'  class="chart" title="Trendline of observations Click for add"/></a>
+                   } 
+                }
+            </td>
+
+            <td>
+                <a href='@Url.Action("Edit", "Patient", new { Id = item.Id })'>
+                    <img src='@Url.Content("~/Images/Pencil.png")' width="20" height="20" alt="Edit Patient Demographics" title="Edit Patient Demographics only"/></a> 
+                <a href='@Url.Action("Details", "Patient", new { Id = item.Id })' >
+                    <img src='@Url.Content("~/Images/Document_generic.png")' width="20" height="20" alt="View Patient Details" title="View Full Patient Details including larger graph"/></a>
+                <a href='@Url.Action("Delete", "Patient", new { Id = item.Id })'>   
+                    <img src='@Url.Content("~/Images/DeleteRed_small.png")' width="20" height="20" alt="Delete Patient and Details" title="Delete Patient and Details"/>
+                </a>
+                <!--            @Html.ActionLink("Details", "Details", new { id = item.Id }) | 
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) -->
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Add New Patient", "Create")
+
+</p>
+<p>@Html.ActionLink("Add Measurements", "Create","Observations")
+</p>

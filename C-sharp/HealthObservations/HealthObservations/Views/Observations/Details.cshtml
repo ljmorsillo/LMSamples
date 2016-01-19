@@ -1,0 +1,51 @@
+﻿@model HealthObservations.Models.Measurement
+
+@{
+    ViewBag.Title = "Observation Details";
+}
+
+
+<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.PatientName)</h2>
+<fieldset>
+    <legend>Measurement</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ObservationTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ObservationTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Observation)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Observation)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Notes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Notes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Validated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Validated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PatientId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PatientId)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

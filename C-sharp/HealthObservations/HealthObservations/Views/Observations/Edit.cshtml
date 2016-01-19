@@ -1,0 +1,70 @@
+﻿@model HealthObservations.Models.Measurement
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Measurement</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ObservationTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ObservationTime)
+            @Html.ValidationMessageFor(model => model.ObservationTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Observation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Observation)
+            @Html.ValidationMessageFor(model => model.Observation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Notes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Notes)
+            @Html.ValidationMessageFor(model => model.Notes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Validated)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Validated)
+            @Html.ValidationMessageFor(model => model.Validated)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PatientId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PatientId)
+            @Html.ValidationMessageFor(model => model.PatientId)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
