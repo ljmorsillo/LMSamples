@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 /// Assortmant of little things to answer HacckerRank and other coding problems
 /// Main() tests the "make change" problem - given an amount, how would you make change, starting with a specific largest
 /// bill
-/// Other objects ar done as Unit Tests
+/// Other objects are done as Unit Tests
 /// </summary>
 namespace HackerRank
 {
